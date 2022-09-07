@@ -1,7 +1,7 @@
-import path from 'path'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-export const config = {
+const config = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
@@ -33,8 +33,10 @@ export const config = {
     ]
   },
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
+    static: './public',
+    devMiddleware: {
+      writeToDisk: true
+    },
     historyApiFallback: true
   },
   externals: {
@@ -43,3 +45,5 @@ export const config = {
   },
   plugins: [new CleanWebpackPlugin()]
 }
+
+module.exports = config
